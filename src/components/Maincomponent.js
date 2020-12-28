@@ -1,33 +1,44 @@
 import React, { Component } from 'react'
+import Home from './HomeComponent';
 import Menu from './MenuComponent'
 import {DISHES} from '../shared/dishes'
 import DishDetail from './DishDetailsComponent'
 import Header from './HeaderComponent'
 import Footer from './FooterComponent'
+import { Switch, Route, Redirect } from 'react-router-dom'
+
 class Main extends Component {
 
-  constructor(props){
-      super(props);
-      this.state = {
+    constructor(props){
+        super(props);
+        this.state = {
         dishes: DISHES,
         selectedDish: null
-      };
+        };
+    }
+    render() {
 
-  }
-  onDishSelect(dishId){
-    this.setState({selectedDish: dishId});
-  }
-  render() {
+        const HomePage = ()=> {
+            return (
+                <Home/> 
+            )
+        }
+
     return (
-      <div className="App">
+        <div className="App">
         <Header/>
-        <Menu dishes={this.state.dishes} 
-                onClick={(dishId)=>this.onDishSelect(dishId)}/>
-        <DishDetail dish={this.state.dishes.filter((dish)=>dish.id === this.state.selectedDish)[0]}/>
+        <Switch>
+            {/* there is no value of props */}
+            <Route path="/home" component = {HomePage}/>
+            {/* in the menu component have props and this value is passess through this way */}
+            <Route exact path="/menu" component = {() => <Menu dishes={this.state.dishes} />}/>
+            {/* <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} /> */}
+            <Redirect to="/home"/>
+        </Switch>
         <Footer/>
-      </div>
+        </div>
     );
-  }
+    }
 }
 
 export default Main;
