@@ -1,4 +1,4 @@
-/* .App {
+.App {
   text-align: center;
 }
 
@@ -35,7 +35,7 @@
   to {
     transform: rotate(360deg);
   }
-} */
+}
 .row-header{
     margin:0px auto;
     padding:0px auto;
@@ -68,4 +68,16 @@ address{
 
 .navbar-dark {
     background-color: #512DA8;
+}
+li{
+  list-style: none;
+}
+nav{
+  display:flex;
+}
+nav li a{
+  color: #3a3a3a;
+}
+nav li a.active{
+  color: #fff;
 }
