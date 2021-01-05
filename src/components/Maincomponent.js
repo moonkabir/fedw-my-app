@@ -36,22 +36,31 @@ class Main extends Component {
                 /> 
             )
         }
+        
+        const DishWithId = ({match}) => {
+            return(
+                <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
+                comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+            );
+        };
 
-    return (
-        <div className="App">
-        <Header/>
-        <Switch>
-            {/* there is no value of props */}
-            <Route path="/home" component = {HomePage}/>
-            {/* in the menu component have props and this value is passess through this way */}
-            <Route exact path="/menu" component = {() => <Menu dishes={this.state.dishes} />}/>
-            <Route exact path="/contactus" component = {Contact}/>
-            {/* <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} /> */}
-            <Redirect to="/home"/>
-        </Switch>
-        <Footer/>
-        </div>
-    );
+        return (
+            <div className="App">
+            <Header/>
+            <Switch>
+                {/* there is no value of props */}
+                <Route path="/home" component = {HomePage}/>
+                {/* in the menu component have props and this value is passess through this way */}
+                <Route exact path="/menu" component = {() => <Menu dishes={this.state.dishes} />}/>
+                {/* menu/:dishId here dishId is perameter key*/}
+                <Route path='/menu/:dishId' component={DishWithId} />
+                <Route exact path="/contactus" component = {Contact}/>
+                {/* <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} /> */}
+                <Redirect to="/home"/>
+            </Switch>
+            <Footer/>
+            </div>
+        );
     }
 }
 
