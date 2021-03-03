@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import {Button,Row,Col,Label,Modal,ModalHeader, ModalBody} from 'reactstrap';
 import {Control, LocalForm, Errors} from 'react-redux-form';
+// import CommentForm from './commentForm';
 
 const maxLength=(len)=>(val)=>!(val)||(val.length <= len);
 const minLength=(len)=>(val)=> val && (val.length>=len);
@@ -16,8 +17,9 @@ class CommentForm extends Component {
     }
 
         handleSubmit(val) {
-            alert("Current State = "+ JSON.stringify(val));
-
+            // alert("Current State = "+ JSON.stringify(val));
+            this.toggleModal();
+            this.props.addComment(this.props.dishId, val.rating, val.author, val.comment);
         }
 
         toggleModal(){
